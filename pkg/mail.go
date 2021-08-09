@@ -25,7 +25,7 @@ func MailTo(mailTo string, subject, body string, g config.Server, wg *sync.WaitG
 	var bodyTmp bytes.Buffer
 	bodyTmp.WriteString(body)
 	scanner := bufio.NewScanner(&bodyTmp)
-	bodyHtml := "<h4>Alter Messages>:</h4>"
+	bodyHtml := "<h4>Alter Messages:</h4>"
 	for scanner.Scan() {
 		bodyHtml += fmt.Sprintf("<h4>%s</h4>", scanner.Text())
 	}
