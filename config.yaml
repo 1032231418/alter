@@ -1,7 +1,7 @@
 #Mail  configuration
 mail:
   username: 'xxxx@163.com'
-  password: 'xxxx'
+  password: 'xxxx1'
   host:     'smtp.163.com'
   port:     "465"
 
