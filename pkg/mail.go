@@ -22,13 +22,14 @@ func MailTo(mailTo string, subject, body string, g config.Server, wg *sync.WaitG
 		"port":     g.Mail.Port,
 	}
 
-	var metrics bytes.Buffer
-	metrics.WriteString(body)
-	scanner := bufio.NewScanner(&metrics)
-	bodyHtml := "<h1>Alter Messages:<br/>"
+	var bodyTmp bytes.Buffer
+	bodyTmp.WriteString(body)
+	scanner := bufio.NewScanner(&bodyTmp)
+	bodyHtml := "<h4>Alter Messages>:</h4>"
 	for scanner.Scan() {
-		bodyHtml += fmt.Sprintf("%s<br/>", scanner.Text())
+		bodyHtml += fmt.Sprintf("<h4>%s</h4>", scanner.Text())
 	}
+	bodyHtml += fmt.Sprintf("<img src=\"data:image/jpg;base64,%s\" />", g.Image.Base64)
 	port, _ := strconv.Atoi(mailConn["port"])
 	m := gomail.NewMessage()
 	m.SetHeader("From", mime.QEncoding.Encode("UTF-8", "Alter")+"<"+mailConn["username"]+">")

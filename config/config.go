@@ -5,6 +5,7 @@ type Server struct {
 	Mailto   Mailto   `mapstructure:"mailto" json:"mailto" yaml:"mailto"`
 	Dingding Dingding `mapstructure:"dingding" json:"dingding" yaml:"dingding"`
 	Weixin   Weixin   `mapstructure:"weixin" json:"weixin" yaml:"weixin"`
+	Image    Image    `mapstructure:"image" json:"image" yaml:"image"`
 }
 
 type Mail struct {
@@ -24,4 +25,8 @@ type Dingding struct {
 
 type Weixin struct {
 	Webhook string `mapstructure:"webhook" json:"webhook" yaml:"webhook"`
+}
+
+type Image struct {
+	Base64 string `mapstructure:"base64" json:"base64" yaml:"base64"`
 }
