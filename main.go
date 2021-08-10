@@ -15,14 +15,11 @@ var (
 )
 
 func main() {
-	//接受参数
-	args := os.Args //获取用户输入的所有参数
-	//args的类型是[]string
-
-	configfile := args[1] //一个参数接收配置文件路径
-	t := args[2]          //第二个参数选择发送通道类型
-	subject := args[3]    //第三个参数选择发送主题
-	body := args[4]       //第四个参数发送内容
+	args := os.Args       //获取用户输入的所有参数
+	configfile := args[1] //第一个参数: 接收配置文件路径
+	t := args[2]          //第二个参数: 发送通道类型
+	subject := args[3]    //第三个参数: 发送主题
+	body := args[4]       //第四个参数: 发送内容
 
 	v := viper.New()
 	v.SetConfigFile(configfile)
