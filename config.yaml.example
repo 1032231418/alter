@@ -7,7 +7,7 @@ mail:
 
 #Mail to   configuration
 mailto:
-  mails: "xxxxxx@163.com"
+  mails: "xxxxxx@163.com,xxxx@qq.com"
 
 #Dingding to configuration
 dingding:
