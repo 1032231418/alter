@@ -10,11 +10,9 @@ import (
 	"mime"
 	"strconv"
 	"strings"
-	"sync"
 )
 
-func MailTo(mailTo string, subject, body string, g config.Server, wg *sync.WaitGroup) {
-	defer wg.Done()
+func MailTo(mailTo []string, subject, body string, g config.Server) {
 	mailConn := map[string]string{
 		"username": g.Mail.Username,
 		"authCode": g.Mail.Password,
@@ -33,7 +31,7 @@ func MailTo(mailTo string, subject, body string, g config.Server, wg *sync.WaitG
 	port, _ := strconv.Atoi(mailConn["port"])
 	m := gomail.NewMessage()
 	m.SetHeader("From", mime.QEncoding.Encode("UTF-8", "Alter")+"<"+mailConn["username"]+">")
-	m.SetHeader("To", mailTo)
+	m.SetHeader("To", mailTo...)
 	m.SetHeader("Subject", subject)
 	m.SetBody("text/html", bodyHtml)
 	d := gomail.NewDialer(mailConn["host"], port, mailConn["username"], mailConn["authCode"])
@@ -46,11 +44,6 @@ func MailTo(mailTo string, subject, body string, g config.Server, wg *sync.WaitG
 }
 
 func SendMail(g config.Server, subject, body string) {
-	var wg sync.WaitGroup
 	receiver := strings.Split(g.Mailto.Mails, ",")
-	for _, mail := range receiver {
-		wg.Add(1)
-		go MailTo(mail, subject, body, g, &wg)
-	}
-	wg.Wait()
+	MailTo(receiver, subject, body, g)
 }
