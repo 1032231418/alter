@@ -1,4 +1,4 @@
-# Alter
+# Alter 配置文件
 
 #Mail  configuration
 ```
@@ -27,4 +27,9 @@ weixin:
 ```
 image:
   base64: ''
+```
+
+# Alter 运行参数传递
+```
+  #go run main.go  config.yaml  mail 这是一封测试邮件 测试邮件内容
 ```
